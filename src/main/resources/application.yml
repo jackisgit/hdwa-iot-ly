@@ -1,0 +1,20 @@
+mqtt:
+  hostUrl: tcp://10.117.32.90:1883
+  username: admin
+  password: wanda@1234
+  client-id: IOT-EPC-Pj3413020010-${spring.profiles.active}
+  cleanSession: true
+  reconnect: true
+  keepAlive: 100
+  isOpen: true
+  qos: 1
+  sendtopic: project/gcId/report
+  setdownTopic: cloud/gcid/setdown
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 16379
+    password:
+
+beanName: opcCommunicationAsync

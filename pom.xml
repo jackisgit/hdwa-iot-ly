@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.wanda.epc</groupId>
+        <artifactId>iot_epc_dependencies</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>iot_epc_ly_opc</artifactId>
+    <version>1.5.0-R20230530</version>    <!--    大的版本升级修改第一位;大的bug修复-修改第二位;小的bug修复修改第三位;-->
+
+    <dependencies>
+        <dependency>
+            <groupId>com.wanda.epc</groupId>
+            <artifactId>iot_epc_common</artifactId>
+            <version>${iot_epc_common.version}</version>
+        </dependency>
+        <!--utgard start opc da通讯协议包-->
+        <dependency>
+            <groupId>org.openscada.external</groupId>
+            <artifactId>org.openscada.external.jcifs</artifactId>
+            <version>${external.jcifs.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.openscada.jinterop</groupId>
+            <artifactId>org.openscada.jinterop.core</artifactId>
+            <version>${jinterop.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openscada.jinterop</groupId>
+            <artifactId>org.openscada.jinterop.deps</artifactId>
+            <version>${jinterop.deps.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.openscada.utgard</groupId>
+            <artifactId>org.openscada.opc.dcom</artifactId>
+            <version>${opc.dcom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openscada.utgard</groupId>
+            <artifactId>org.openscada.opc.lib</artifactId>
+            <version>${opc.lib.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>${bcprov-jdk16.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
