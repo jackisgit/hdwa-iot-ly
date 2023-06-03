@@ -103,14 +103,14 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
             for (Map.Entry<Item, ItemState> entry : read.entrySet()) {
                 Item item = entry.getKey();
                 String value = readItem(item);
-                logger.info("==================="+item.getId()+"+++++++++++++++++++"+value);
-                if (StringUtils.isEmpty(value)){
-                    logger.info("==================="+item.getId()+"+++++++++++++++++++点位数据采集为空");
+                logger.info("===================" + item.getId() + "+++++++++++++++++++" + value);
+                if (StringUtils.isEmpty(value)) {
+                    logger.info("===================" + item.getId() + "+++++++++++++++++++点位数据采集为空");
                     continue;
                 }
                 List<DeviceMessage> deviceMessagesList = deviceParamListMap.get(item.getId());
-                if (!CollectionUtils.isEmpty(deviceParamListMap)){
-                    for (DeviceMessage deviceMessage : deviceMessagesList){
+                if (!CollectionUtils.isEmpty(deviceParamListMap)) {
+                    for (DeviceMessage deviceMessage : deviceMessagesList) {
                         deviceMessage.setValue(value);
                         sendMessage(deviceMessage);
                     }
@@ -126,10 +126,10 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
      * 发送心跳
      */
     public void sendHeartbeat() {
-        Item item  = items[0];
+        Item item = items[0];
         try {
             readItem(item);
-        } catch (JIException e) {
+        } catch (Exception e) {
             logger.info("opc服务器断线，执行重连操作", e);
             init();
         }
@@ -137,7 +137,7 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
 
     @Override
     public void sendMessage(DeviceMessage dm) {
-        if (dm != null){
+        if (dm != null) {
             commonDevice.sendMessage(dm);
         }
     }
@@ -145,14 +145,14 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
 
     @Override
     @Async
-    public void dispatchCommand(String meter, Integer funcid, String value, String message)  throws JIException, AddFailedException {
+    public void dispatchCommand(String meter, Integer funcid, String value, String message) throws JIException, AddFailedException {
         DeviceMessage deviceMessage = controlParamMap.get(meter + "-" + funcid);
-        if (deviceMessage!=null){
+        if (deviceMessage != null) {
             String outParamId = deviceMessage.getOutParamId();
             Item item = group.addItem(outParamId);
             JIVariant jiVariant = new JIVariant(value);
             Integer write = item.write(jiVariant);
-            logger.info("控制指令==================="+item.getId()+"+++++++++++++++++++"+write);
+            logger.info("控制指令===================" + item.getId() + "+++++++++++++++++++" + write);
             //反馈到iot-project
             commonDevice.feedback(message);
         }
@@ -169,7 +169,7 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
      * @return
      * @throws JIException
      */
-    public  String readItem(Item item) throws JIException {
+    public String readItem(Item item) throws JIException {
         JIVariant jiVariant = item.read(false).getValue();
         switch (jiVariant.getType()) {
             case JIVariant.VT_I2:
@@ -210,7 +210,7 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
      * @throws AddFailedException
      * @Description String数组转换成Item数组
      */
-    public Item[] addItemsByGroup(String[] itemIds) throws  JIException, AddFailedException {
+    public Item[] addItemsByGroup(String[] itemIds) throws JIException, AddFailedException {
         Map<String, Item> itemMap = this.group.addItems(itemIds);
         int arrLength = itemMap.size();
         Item[] items = new Item[arrLength];
@@ -226,13 +226,13 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
         return items;
     }
 
-    private boolean initItem(){
-        if (addressList!=null && addressList.size()>0){
+    private boolean initItem() {
+        if (addressList != null && addressList.size() > 0) {
             String[] itemArr = new String[addressList.size()];
             addressList.toArray(itemArr);
-            try{
+            try {
                 items = addItemsByGroup(itemArr);
-            }catch (Exception e){
+            } catch (Exception e) {
                 if (e instanceof AddFailedException) {
                     AddFailedException exception = (AddFailedException) e;
                     Map<String, Integer> errors = exception.getErrors();
@@ -251,8 +251,8 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
     /**
      * @Description 记载子系统地址到addressList
      */
-    private void loadAddressList(){
-        for (String outParamId :deviceParamListMap.keySet()){
+    private void loadAddressList() {
+        for (String outParamId : deviceParamListMap.keySet()) {
             addressList.add(outParamId);
         }
     }
@@ -276,6 +276,10 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
             } catch (JIException e) {
                 e.printStackTrace();
             }
+        }
+        if (!CollectionUtils.isEmpty(this.addressList)) {
+            this.addressList.clear();
+            this.items = null;
         }
         this.autos = null;
         this.server = null;
