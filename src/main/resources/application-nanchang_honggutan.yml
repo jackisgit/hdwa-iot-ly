@@ -27,7 +27,7 @@ server:
 epc:
   gatewayId: LY
   gcId: 3601130010
-  subsystem: ryxt/lzqk/ktmd/hjpz/jsxt/psxt/ddc/
+  subsystem: lzqk/
   threadNum: 10
 opc:
   host: 192.168.10.176
