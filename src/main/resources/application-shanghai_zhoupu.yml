@@ -3,7 +3,7 @@ mqtt:
   hostUrl: tcp://192.168.1.253:1883
   username: admin
   password: wanda@1234
-  client-id: IOT-EPC-Pj3101151320-ba
+  client-id: IOT-EPC-Pj3101151320-ly
   cleanSession: true
   reconnect: true
   keepAlive: 100
@@ -25,7 +25,7 @@ server:
   port: 9030
 #广场ID及GatewayId
 epc:
-  gatewayId: BA
+  gatewayId: LY
   gcId: 3101151320
   subsystem: lzqk/
   threadNum: 10
