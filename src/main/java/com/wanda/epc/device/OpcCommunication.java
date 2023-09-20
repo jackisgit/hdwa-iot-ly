@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -51,6 +52,9 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
     CommonDevice commonDevice;
 
     private AutoReconnectController autos = null;
+
+    @Value("${opc.isNotBoolean}")
+    private Boolean isNotBoolean;
 
 
     @PostConstruct
@@ -150,9 +154,18 @@ public class OpcCommunication extends BaseDevice implements DisposableBean {
         if (deviceMessage != null) {
             String outParamId = deviceMessage.getOutParamId();
             Item item = group.addItem(outParamId);
-            JIVariant jiVariant = new JIVariant(value);
+            JIVariant jiVariant;
+            logger.info("控制指令开始下发===================" + item.getId() + "+++++++++++++++++++值:" + value);
+            if (isNotBoolean) {
+                jiVariant = new JIVariant(value);
+            } else {
+                value = value.equals("1.0") ? "1" : "0";
+                jiVariant = new JIVariant(value);
+                logger.info("控制指令转换===================" + item.getId() + "+++++++++++++++++++值:" + value);
+            }
             Integer write = item.write(jiVariant);
-            logger.info("控制指令===================" + item.getId() + "+++++++++++++++++++" + write);
+            logger.info("控制指令下发结束===================" + item.getId() + "+++++++++++++++++++值" + value + "-------------------控制结果" + write);
+
             //反馈到iot-project
             commonDevice.feedback(message);
         }

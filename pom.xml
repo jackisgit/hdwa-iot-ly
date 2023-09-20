@@ -62,4 +62,30 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <!-- https://gitee.com/roseboy/classfinal -->
+                <groupId>net.roseboy</groupId>
+                <artifactId>classfinal-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <password>#</password><!--加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码-->
+                    <packages>com.wanda</packages>
+                    <!--                        <cfgfiles>*.yml</cfgfiles>-->
+                    <excludes>org.spring</excludes>
+                    <code>6755E40E2B44997B1478AA8536978149D41D8CD98F00B204E9800998ECF8427ED41D8CD98F00B204E9800998ECF8427E</code>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>classFinal</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

@@ -1,9 +1,9 @@
-#上海周浦
+#东营西城
 mqtt:
-  hostUrl: tcp://192.168.1.253:1883
+  hostUrl: tcp://10.84.32.166:1883
   username: admin
   password: wanda@1234
-  client-id: IOT-EPC-Pj3101151320-ly
+  client-id: IOT-EPC-Pj3705020020-ly
   cleanSession: true
   reconnect: true
   keepAlive: 100
@@ -15,7 +15,7 @@ mqtt:
 spring:
     #redis配置
   redis:
-    host: 192.168.1.253
+    host: 10.84.32.166
     port: 16379
     password:
 
@@ -26,16 +26,16 @@ server:
 #广场ID及GatewayId
 epc:
   gatewayId: LY
-  gcId: 3101151320
+  gcId: 3705020020
   subsystem: lzqk/
   threadNum: 10
 opc:
-  host: 127.0.0.1
-  user: ZPWD-BAS
-  password: 1234
+  host: 10.84.32.34
+  user: administrator
+  password: dywd201500815
   #域 为空即可
   domain: ""
   #注册表id
-  clsid: 5230C713-0BD6-44BD-BAF1-31CC95234567
+  clsid: 6E6170F0-FF2D-11D2-8087-00105AA8F840
   progId: ""
   isNotBoolean: 0
