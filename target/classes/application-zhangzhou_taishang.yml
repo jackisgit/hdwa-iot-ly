@@ -1,0 +1,40 @@
+#漳州台商
+mqtt:
+  hostUrl: tcp://10.71.16.208:1883
+  username: admin
+  password: wanda@1234
+  client-id: IOT-EPC-Pj3506811020-lzqk
+  cleanSession: true
+  reconnect: true
+  keepAlive: 100
+  isOpen: true
+  qos: 1
+  sendtopic: project/gcId/report
+  setdownTopic: cloud/gcid/setdown
+
+spring:
+    #redis配置
+  redis:
+    host: 10.71.16.208
+    port: 16379
+    password:
+
+beanName: opcCommunication
+
+server:
+  port: 9032
+#广场ID及GatewayId
+epc:
+  gatewayId: LY
+  gcId: 3506811020
+  subsystem: lzqk/
+  threadNum: 10
+opc:
+  host: 10.71.16.135
+  user: administrator
+  password: feiyang2A@
+  #域 为空即可
+  domain: ""
+  #注册表id
+  clsid: c6c83062-6c69-11d4-80ff-00c04f790f3e
+  progId: ""

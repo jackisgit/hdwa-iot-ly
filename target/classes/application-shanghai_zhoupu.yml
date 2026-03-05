@@ -1,0 +1,41 @@
+#上海周浦
+mqtt:
+  hostUrl: tcp://192.168.1.253:1883
+  username: admin
+  password: wanda@1234
+  client-id: IOT-EPC-Pj3101151320-ly
+  cleanSession: true
+  reconnect: true
+  keepAlive: 100
+  isOpen: true
+  qos: 1
+  sendtopic: project/gcId/report
+  setdownTopic: cloud/gcid/setdown
+
+spring:
+    #redis配置
+  redis:
+    host: 192.168.1.253
+    port: 16379
+    password:
+
+beanName: opcCommunication
+
+server:
+  port: 9030
+#广场ID及GatewayId
+epc:
+  gatewayId: LY
+  gcId: 3101151320
+  subsystem: lzqk/
+  threadNum: 10
+opc:
+  host: 127.0.0.1
+  user: ZPWD-BAS
+  password: 1234
+  #域 为空即可
+  domain: ""
+  #注册表id
+  clsid: 5230C713-0BD6-44BD-BAF1-31CC95234567
+  progId: ""
+  isNotBoolean: 0

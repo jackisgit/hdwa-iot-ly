@@ -1,0 +1,40 @@
+#南昌红谷滩
+mqtt:
+  hostUrl: tcp://10.11.13.204:1883
+  username: admin
+  password: wanda@1234
+  client-id: IOT-EPC-Pj3601130010-ly
+  cleanSession: true
+  reconnect: true
+  keepAlive: 100
+  isOpen: true
+  qos: 1
+  sendtopic: project/gcId/report
+  setdownTopic: cloud/gcid/setdown
+
+spring:
+    #redis配置
+  redis:
+    host: 10.11.13.204
+    port: 16379
+    password:
+
+beanName: opcCommunication
+
+server:
+  port: 9032
+#广场ID及GatewayId
+epc:
+  gatewayId: LY
+  gcId: 3601130010
+  subsystem: lzqk/
+  threadNum: 10
+opc:
+  host: 192.168.10.176
+  user: administrator
+  password: Wander_123456
+  #域 为空即可
+  domain: ""
+  #注册表id
+  clsid: 75d00bbb-dda5-11d1-b944-9e614d000000
+  progId: ""

@@ -1,0 +1,40 @@
+#茂名化州
+mqtt:
+  hostUrl: tcp://10.165.160.92:1883
+  username: admin
+  password: wanda@1234
+  client-id: IOT-EPC-Pj4409820010-ly
+  cleanSession: true
+  reconnect: true
+  keepAlive: 100
+  isOpen: true
+  qos: 1
+  sendtopic: project/gcId/report
+  setdownTopic: cloud/gcid/setdown
+
+spring:
+    #redis配置
+  redis:
+    host: 10.165.160.92
+    port: 16379
+    password:
+
+beanName: opcCommunication
+
+server:
+  port: 9032
+#广场ID及GatewayId
+epc:
+  gatewayId: LY
+  gcId: 4409820010
+  subsystem: lzqk/
+  threadNum: 10
+opc:
+  host: 192.168.8.200
+  user: administrator
+  password: wanda@1234
+  #域 为空即可
+  domain: ""
+  #注册表id
+  clsid: 21C3E5E0-B7E4-11d4-8BE0-0050BACFBB99
+  progId: ""
